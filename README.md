@@ -12,7 +12,7 @@ This inventory management system was developed for stock tracking for a business
 ## How to Use
 
 - Open Inventory.txt file, delete the sample data and input the your own information as you pplease in the same format as the sample data.
-![Screenshot 1](/screenshots/screenshot1.png)
+![Screenshot 1](/screenshots/sreenshot1.png)
 *View of the UI and Data Grid.*
 
 ![Screenshot 2](/screenshots/screenshot2.png)
