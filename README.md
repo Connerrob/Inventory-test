@@ -16,4 +16,5 @@ This inventory management system was developed for stock tracking for a business
 *View of the UI and Data Grid.*
 
 ![Screenshot 2](/screenshots/screenshot3.png)
+
 *The inventory.txt with the sample data.*
