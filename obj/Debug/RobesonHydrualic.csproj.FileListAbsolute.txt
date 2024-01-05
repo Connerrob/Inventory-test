@@ -1,0 +1,10 @@
+C:\Users\conne\OneDrive\Desktop\Test\WindowsAppColby\bin\Debug\WindowsAppColby.exe.config
+C:\Users\conne\OneDrive\Desktop\Test\WindowsAppColby\bin\Debug\WindowsAppColby.exe
+C:\Users\conne\OneDrive\Desktop\Test\WindowsAppColby\bin\Debug\WindowsAppColby.pdb
+C:\Users\conne\OneDrive\Desktop\Test\WindowsAppColby\obj\Debug\RobesonHydrualic.csproj.AssemblyReference.cache
+C:\Users\conne\OneDrive\Desktop\Test\WindowsAppColby\obj\Debug\WindowsAppColby.Form1.resources
+C:\Users\conne\OneDrive\Desktop\Test\WindowsAppColby\obj\Debug\WindowsAppColby.Properties.Resources.resources
+C:\Users\conne\OneDrive\Desktop\Test\WindowsAppColby\obj\Debug\RobesonHydrualic.csproj.GenerateResource.cache
+C:\Users\conne\OneDrive\Desktop\Test\WindowsAppColby\obj\Debug\RobesonHydrualic.csproj.CoreCompileInputs.cache
+C:\Users\conne\OneDrive\Desktop\Test\WindowsAppColby\obj\Debug\WindowsAppColby.exe
+C:\Users\conne\OneDrive\Desktop\Test\WindowsAppColby\obj\Debug\WindowsAppColby.pdb

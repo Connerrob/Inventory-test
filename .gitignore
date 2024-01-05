@@ -1,0 +1,5 @@
+# Ignore VS Code settings folder
+.vscode/
+
+# Ignore the specific file causing issues
+.vscode/extensions/ms-dotnettools.csdevkit-1.1.16-win32-x64/components/CPS/platforms/win32-x64/node_modules/@microsoft/visualstudio-projectsystem-server.win32-x64/Microsoft.VisualStudio.ProjectSystem.ProjectInitializationStatusService.servicehub.service.json
