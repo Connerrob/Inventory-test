@@ -23,6 +23,8 @@ namespace WindowsAppColby
 
         private void InitializeDataGridView()
         {
+            dataGridViewInventory.AutoGenerateColumns = false;
+
             // Create columns programmatically
             DataGridViewTextBoxColumn partNumberColumn = new DataGridViewTextBoxColumn();
             partNumberColumn.HeaderText = "Part Number";
@@ -42,8 +44,8 @@ namespace WindowsAppColby
             dataGridViewInventory.Columns.Add(costColumn);
 
             DataGridViewTextBoxColumn myPriceColumn = new DataGridViewTextBoxColumn();
-            myPriceColumn.HeaderText = "My Price";
-            myPriceColumn.DataPropertyName = "MyPrice";
+            myPriceColumn.HeaderText = "Price";
+            myPriceColumn.DataPropertyName = "Price";
             myPriceColumn.DefaultCellStyle.Format = "C2";
             dataGridViewInventory.Columns.Add(myPriceColumn);
 
@@ -54,7 +56,7 @@ namespace WindowsAppColby
 
             DataGridViewLinkColumn orderColumn = new DataGridViewLinkColumn();
             orderColumn.HeaderText = "Order";
-            orderColumn.DataPropertyName = "OrderLink";
+            orderColumn.DataPropertyName = "Order";
             dataGridViewInventory.Columns.Add(orderColumn);
         }
 
@@ -87,9 +89,9 @@ namespace WindowsAppColby
                                 PartNumber = parts[0],
                                 ListPrice = listPrice,
                                 Cost = cost,
-                                MyPrice = myPrice,
+                                Price = myPrice,
                                 OnHand = onHandQuantity,
-                                OrderLink = orderLink,
+                                Order = orderLink,
                             });
                         }
                     }
@@ -115,7 +117,21 @@ namespace WindowsAppColby
             }
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private void UpdateLowInventoryList()
+        {
+            // Clear existing items in the ListBox or ListView
+            listBoxLow.Items.Clear();
+
+            // Identify and add items with "On Hand" less than 5 to the ListBox or ListView
+            foreach (var item in inventoryItems)
+            {
+                if (item.OnHand < 5)
+                {
+                    listBoxLow.Items.Add(item.PartNumber);
+                }
+            }
+        }
+            private void saveButton_Click(object sender, EventArgs e)
         {
             SaveInventory();
             UpdateInventoryDisplay();
@@ -133,7 +149,7 @@ namespace WindowsAppColby
                     {
                         foreach (var item in inventoryItems)
                         {
-                            writer.WriteLine($"{item.PartNumber},{item.ListPrice},{item.Cost},{item.MyPrice},{item.OnHand},{item.OrderLink}");
+                            writer.WriteLine($"{item.PartNumber},{item.ListPrice},{item.Cost},{item.Price},{item.OnHand},{item.Order}");
                         }
                     }
 
@@ -144,6 +160,7 @@ namespace WindowsAppColby
                     MessageBox.Show("Error saving inventory: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            UpdateLowInventoryList();
         }
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
