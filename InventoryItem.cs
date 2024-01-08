@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsAppColby
 {
-    internal class InventoryItem
+    public class InventoryItem
     {
         public string PartNumber { get; set; }
         public decimal ListPrice { get; set; }
@@ -14,5 +14,7 @@ namespace WindowsAppColby
         public decimal Price { get; set; }
         public int OnHand { get; set; }
         public Uri Order { get; set; }
+        public int QuantityUsed { get; set; }
+        public int OriginalOnHand { get; set; }
     }
 }
