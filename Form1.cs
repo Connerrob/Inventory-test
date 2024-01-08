@@ -253,6 +253,7 @@ namespace WindowsAppColby
         }
         private void addToInvoiceButton_Click(object sender, EventArgs e)
         {
+            dataGridViewSelectParts.AutoGenerateColumns = false;
             // Ensure that there are selected rows
             if (dataGridViewInventory.SelectedRows.Count > 0)
             {
@@ -317,7 +318,13 @@ namespace WindowsAppColby
                 priceColumn.DefaultCellStyle.Format = "C2"; // Currency format
                 dataGridViewSelectParts.Columns.Add(priceColumn);
 
-                selectedPartsColumnsInitialized = true;  // Set the flag to true after initializing columns
+                DataGridViewTextBoxColumn totalColumn = new DataGridViewTextBoxColumn();
+                totalColumn.HeaderText = "Total";
+                totalColumn.DataPropertyName = "Total";
+                totalColumn.DefaultCellStyle.Format = "C2";
+                dataGridViewSelectParts.Columns.Add(totalColumn);
+
+                selectedPartsColumnsInitialized = true;
             }
 
             // Create a new list with only the necessary information for display
@@ -325,8 +332,14 @@ namespace WindowsAppColby
             {
                 PartNumber = item.PartNumber,
                 Price = item.Price,
-                QuantityUsed = item.QuantityUsed
+                QuantityUsed = item.QuantityUsed,
+                Total = item.QuantityUsed * item.Price
             }).ToList();
+
+            foreach (var selectedPart in selectedPartsToAdd)
+            {
+                selectedPart.Total = selectedPart.QuantityUsed * selectedPart.Price;
+            }
 
             // Update the DataGridView for selected parts
             dataGridViewSelectParts.DataSource = null;

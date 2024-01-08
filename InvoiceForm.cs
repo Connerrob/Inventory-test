@@ -2,6 +2,7 @@
 using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace WindowsAppColby
@@ -45,7 +46,24 @@ namespace WindowsAppColby
             // Set up company information
             string companyName = "Robeson Hydraulic";
             string ownerName = "Colby Robeson";
-            string ownerContact = "Contact: Your Contact Information";  // Replace with actual contact information
+            string ownerContact = "Contact: 123-345-6789";
+
+            int yOffset = 140;
+            float rightPadding = 475;
+            float paddingDate = 40;
+
+            XStringFormat rightAlignment = new XStringFormat
+            {
+                Alignment = XStringAlignment.Far,
+                LineAlignment = XLineAlignment.Near
+            };
+
+            // Calculate subtotal, tax total, and total
+            decimal subtotal = selectedItems.Sum(item => item.Total);
+            decimal taxRate = 0.07m; 
+            decimal taxTotal = subtotal * taxRate;
+            decimal total = subtotal + taxTotal;
+
 
             // Set up font and position for company information
             XFont companyFont = new XFont("Arial", 24, XFontStyle.Bold); // Larger font size for company name
@@ -63,19 +81,88 @@ namespace WindowsAppColby
             ownerRect = new XRect(10, 100, pageWidth, 20);
             gfx.DrawString(ownerContact, ownerFont, XBrushes.Black, ownerRect, XStringFormats.TopLeft);
 
+
+            XFont dateFont = new XFont("Arial", 12, XFontStyle.Regular);
+            XRect dateRect = new XRect(10, yOffset, pageWidth - 10 - paddingDate, 20);
+            string currentDate = DateTime.Now.ToString("MMMM dd, yyyy"); // Format the date as desired
+            
+            // Draw the current date
+            gfx.DrawString($"{currentDate}", dateFont, XBrushes.Black, dateRect, rightAlignment  );
+            yOffset += 20; // Increment yOffset for spacing
+
+
             // Set up font and position for invoice details
-            int yOffset = 140; // Adjusted starting position for details
+            yOffset = 140; 
             XFont font = new XFont("Arial", 12, XFontStyle.Regular);
+
+
+            // Draw a horizontal line to separate sections
+            gfx.DrawLine(XPens.Black, 10, yOffset - 10, pageWidth - 10, yOffset - 10);
+
+            // Increase yOffset for spacing between first line and table
+            yOffset += 60;
+
+            // Draw table headers
+            XFont headerFont = new XFont("Arial", 12, XFontStyle.Bold);
+            int headerYOffset = yOffset; // Adjusted starting position for headers
+
+            // Calculate the width of each column
+            double columnWidth = (pageWidth - 20) / 4;
+
+            // Draw table headers
+            gfx.DrawString("Quantity", headerFont, XBrushes.Black, new XRect(10, yOffset, columnWidth, 20), XStringFormats.TopLeft);
+            gfx.DrawString("Part", headerFont, XBrushes.Black, new XRect(10 + columnWidth, yOffset, columnWidth, 20), XStringFormats.TopLeft);
+            gfx.DrawString("Price", headerFont, XBrushes.Black, new XRect(10 + 2 * columnWidth, yOffset, columnWidth, 20), XStringFormats.TopLeft);
+            gfx.DrawString("Total", headerFont, XBrushes.Black, new XRect(10 + 3 * columnWidth, yOffset, columnWidth, 20), XStringFormats.TopLeft);
+
+            // Increment yOffset for content
+            yOffset += 20;
+
+            // Draw grid lines
+            gfx.DrawLine(XPens.Black, 10, yOffset, pageWidth - 10, yOffset); // Horizontal line
 
             // Iterate through selectedItems and add information to the document
             foreach (var item in selectedItems)
             {
-                gfx.DrawString($"Price: {item.Price:C2}", font, XBrushes.Black, new XRect(10, yOffset, pageWidth, 20), XStringFormats.TopLeft);
-                yOffset += 20;
-            }
-        }
+                // Draw grid lines between rows
+                gfx.DrawLine(XPens.Black, 10, yOffset, pageWidth - 10, yOffset);
 
-        private void generatePDFButton_Click(object sender, EventArgs e)
+                // Draw table content
+                gfx.DrawString(item.QuantityUsed.ToString(), font, XBrushes.Black, new XRect(10, yOffset, columnWidth, 20), XStringFormats.TopLeft);
+                gfx.DrawString(item.PartNumber, font, XBrushes.Black, new XRect(10 + columnWidth, yOffset, columnWidth, 20), XStringFormats.TopLeft);
+                gfx.DrawString(item.Price.ToString("C2"), font, XBrushes.Black, new XRect(10 + 2 * columnWidth, yOffset, columnWidth, 20), XStringFormats.TopLeft);
+                gfx.DrawString(item.Total.ToString("C2"), font, XBrushes.Black, new XRect(10 + 3 * columnWidth, yOffset, columnWidth, 20), XStringFormats.TopLeft);
+
+                yOffset += 20; // Adjusted spacing between rows
+            }
+
+            decimal partsTotal = selectedItems.Sum(item => item.Total);
+
+            yOffset += 20;
+
+            gfx.DrawString($"Parts Total:", font, XBrushes.Black, new XRect(10, yOffset, pageWidth - 10 - rightPadding, 20), XStringFormats.TopLeft);
+            gfx.DrawString($"{partsTotal:C2}", font, XBrushes.Black, new XRect(10, yOffset, pageWidth - 10 - rightPadding, 20), rightAlignment);
+            yOffset += 20;
+
+            gfx.DrawString($"Subtotal:", font, XBrushes.Black, new XRect(10, yOffset, pageWidth - 10 - rightPadding, 20), XStringFormats.TopLeft);
+            gfx.DrawString($"{subtotal:C2}", font, XBrushes.Black, new XRect(10, yOffset, pageWidth - 10 - rightPadding, 20), rightAlignment);
+            yOffset += 20;
+
+            gfx.DrawString($"Tax Total:", font, XBrushes.Black, new XRect(10, yOffset, pageWidth - 10 - rightPadding, 20), XStringFormats.TopLeft);
+            gfx.DrawString($"{taxTotal:C2}", font, XBrushes.Black, new XRect(10, yOffset, pageWidth - 10 - rightPadding, 20), rightAlignment);
+            yOffset += 20;
+
+            yOffset += 10;
+            gfx.DrawLine(XPens.Black, 10, yOffset - 10, pageWidth - 10, yOffset - 10);
+
+            gfx.DrawString($"Total:", new XFont("Arial", 12, XFontStyle.Bold), XBrushes.Black, new XRect(10, yOffset, pageWidth - 10 - rightPadding, 20), XStringFormats.TopLeft);
+            gfx.DrawString($"{total:C2}", new XFont("Arial", 12, XFontStyle.Bold), XBrushes.Black, new XRect(10, yOffset, pageWidth - 10 - rightPadding, 20), rightAlignment);
+            yOffset += 20;
+
+        } 
+
+
+            private void generatePDFButton_Click(object sender, EventArgs e)
         {
             GenerateInvoice();
             

@@ -16,5 +16,7 @@ namespace WindowsAppColby
         public Uri Order { get; set; }
         public int QuantityUsed { get; set; }
         public int OriginalOnHand { get; set; }
+        public decimal Total { get; set; }
+
     }
 }
