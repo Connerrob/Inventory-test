@@ -22,9 +22,11 @@ This inventory management system was developed for stock tracking for a business
 *View of the UI and Data Grid.*
 
 ![Screenshot 2](/screenshots/getUserHoursCustName.png)
+
 *View of the UI for getting user input for invoice generation.*
 
 ![Screenshot 3](/screenshots/PDFscreenshot.png)
+
 *PDF Generated*
 
 ![Screenshot 4](/screenshots/screenshot3.png)
