@@ -156,7 +156,8 @@ namespace WindowsAppColby
 
                 GenerateInvoiceContent(gfx, page.Width, page.Height, currentDate, invoiceNumber);
 
-                string filePath = $@"Invoice_{invoiceNumber}.pdf";
+                string customerName = selectedItems.LastOrDefault()?.CustomerName ?? "N_A";
+                string filePath = $@"D:\conne\Documents\{customerName}_{invoiceNumber}.pdf";
                 document.Save(filePath);
 
                 UpdateInvoiceCounter();
@@ -170,7 +171,7 @@ namespace WindowsAppColby
         // Method to generate content for the invoice
         private void GenerateInvoiceContent(XGraphics gfx, XUnit pageWidth, XUnit pageHeight, string currentDate, string invoiceNumber)
         {
-            string companyName = "Robeson Hydraulic";
+            string companyName = "Robeson Hydraulics LLC.";
             string ownerName = "Colby Robeson";
             string ownerContact = "Contact: 123-345-6789";
 

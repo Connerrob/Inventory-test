@@ -36,23 +36,21 @@
             this.dataGridViewInventory = new System.Windows.Forms.DataGridView();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.generateInvoiceButton = new System.Windows.Forms.Button();
             this.addToInvoiceButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.searchTextBox = new System.Windows.Forms.TextBox();
+            this.generateInvoiceButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.listBoxLow = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.clearInvoiceList = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.dataGridViewSelectParts = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInventory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSelectParts)).BeginInit();
             this.SuspendLayout();
@@ -96,19 +94,6 @@
             this.panel1.Size = new System.Drawing.Size(266, 722);
             this.panel1.TabIndex = 2;
             // 
-            // generateInvoiceButton
-            // 
-            this.generateInvoiceButton.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.generateInvoiceButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.generateInvoiceButton.Location = new System.Drawing.Point(41, 175);
-            this.generateInvoiceButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.generateInvoiceButton.Name = "generateInvoiceButton";
-            this.generateInvoiceButton.Size = new System.Drawing.Size(230, 52);
-            this.generateInvoiceButton.TabIndex = 1;
-            this.generateInvoiceButton.Text = "Generate Invoice";
-            this.generateInvoiceButton.UseVisualStyleBackColor = false;
-            this.generateInvoiceButton.Click += new System.EventHandler(this.generateInvoiceButton_Click);
-            // 
             // addToInvoiceButton
             // 
             this.addToInvoiceButton.BackColor = System.Drawing.SystemColors.WindowFrame;
@@ -116,7 +101,7 @@
             this.addToInvoiceButton.Location = new System.Drawing.Point(3, 283);
             this.addToInvoiceButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addToInvoiceButton.Name = "addToInvoiceButton";
-            this.addToInvoiceButton.Size = new System.Drawing.Size(260, 52);
+            this.addToInvoiceButton.Size = new System.Drawing.Size(260, 88);
             this.addToInvoiceButton.TabIndex = 2;
             this.addToInvoiceButton.Text = "Add Item to Invoice List";
             this.addToInvoiceButton.UseVisualStyleBackColor = false;
@@ -140,14 +125,27 @@
             this.searchTextBox.TabIndex = 0;
             this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
+            // generateInvoiceButton
+            // 
+            this.generateInvoiceButton.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.generateInvoiceButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.generateInvoiceButton.Location = new System.Drawing.Point(13, 180);
+            this.generateInvoiceButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.generateInvoiceButton.Name = "generateInvoiceButton";
+            this.generateInvoiceButton.Size = new System.Drawing.Size(282, 60);
+            this.generateInvoiceButton.TabIndex = 1;
+            this.generateInvoiceButton.Text = "Generate Invoice";
+            this.generateInvoiceButton.UseVisualStyleBackColor = false;
+            this.generateInvoiceButton.Click += new System.EventHandler(this.generateInvoiceButton_Click);
+            // 
             // saveButton
             // 
             this.saveButton.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.saveButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.saveButton.Location = new System.Drawing.Point(41, 4);
+            this.saveButton.Location = new System.Drawing.Point(13, 4);
             this.saveButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(230, 52);
+            this.saveButton.Size = new System.Drawing.Size(282, 42);
             this.saveButton.TabIndex = 0;
             this.saveButton.Text = "Save Changes";
             this.saveButton.UseVisualStyleBackColor = false;
@@ -156,8 +154,8 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.panel3.Controls.Add(this.saveButton);
             this.panel3.Controls.Add(this.listBoxLow);
+            this.panel3.Controls.Add(this.saveButton);
             this.panel3.Controls.Add(this.label2);
             this.panel3.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.panel3.Location = new System.Drawing.Point(1609, 14);
@@ -189,23 +187,10 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.panel2.Controls.Add(this.clearInvoiceList);
             this.panel2.Location = new System.Drawing.Point(4, 743);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(266, 244);
             this.panel2.TabIndex = 6;
-            // 
-            // clearInvoiceList
-            // 
-            this.clearInvoiceList.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.clearInvoiceList.ForeColor = System.Drawing.SystemColors.Control;
-            this.clearInvoiceList.Location = new System.Drawing.Point(18, 188);
-            this.clearInvoiceList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.clearInvoiceList.Name = "clearInvoiceList";
-            this.clearInvoiceList.Size = new System.Drawing.Size(230, 52);
-            this.clearInvoiceList.TabIndex = 2;
-            this.clearInvoiceList.Text = "Clear Invoice List";
-            this.clearInvoiceList.UseVisualStyleBackColor = false;
             // 
             // panel5
             // 
@@ -259,7 +244,6 @@
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSelectParts)).EndInit();
             this.ResumeLayout(false);
@@ -281,7 +265,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.DataGridView dataGridViewSelectParts;
         private System.Windows.Forms.Button addToInvoiceButton;
-        private System.Windows.Forms.Button clearInvoiceList;
     }
 }
 
