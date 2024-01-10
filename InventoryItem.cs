@@ -12,11 +12,14 @@ namespace WindowsAppColby
         public decimal ListPrice { get; set; }
         public decimal Cost { get; set; }
         public decimal Price { get; set; }
-        public int OnHand { get; set; }
+        public decimal OnHand { get; set; }
         public Uri Order { get; set; }
-        public int QuantityUsed { get; set; }
-        public int OriginalOnHand { get; set; }
+        public decimal QuantityUsed { get; set; }
+        public decimal OriginalOnHand { get; set; }
         public decimal Total { get; set; }
+
+        public string CustomerName { get; set; }
+        public string ContactInfo { get; set; }
 
     }
 }

@@ -19,13 +19,14 @@ namespace WindowsAppColby
         {
             InitializeComponent();
             InitializeDataGridView();
-            
+
             dataGridViewInventory.CellContentClick += dataGridViewInventory_CellContentClick;
 
             this.WindowState = FormWindowState.Maximized;
 
             inventoryManager = new InventoryManager(inventoryItems);
         }
+
         private void InitializeSelectedPartsDisplay()
         {
             // Call your method to initialize the display for selected parts
@@ -44,13 +45,13 @@ namespace WindowsAppColby
 
             DataGridViewTextBoxColumn listPriceColumn = new DataGridViewTextBoxColumn();
             listPriceColumn.HeaderText = "List Price";
-            listPriceColumn.DataPropertyName = "ListPrice"; 
+            listPriceColumn.DataPropertyName = "ListPrice";
             listPriceColumn.DefaultCellStyle.Format = "C2";
             dataGridViewInventory.Columns.Add(listPriceColumn);
 
             DataGridViewTextBoxColumn costColumn = new DataGridViewTextBoxColumn();
             costColumn.HeaderText = "Cost";
-            costColumn.DataPropertyName = "Cost"; 
+            costColumn.DataPropertyName = "Cost";
             costColumn.DefaultCellStyle.Format = "C2";
             dataGridViewInventory.Columns.Add(costColumn);
 
@@ -92,7 +93,7 @@ namespace WindowsAppColby
                             && decimal.TryParse(parts[1], out decimal listPrice)
                             && decimal.TryParse(parts[2], out decimal cost)
                             && decimal.TryParse(parts[3], out decimal myPrice)
-                            && int.TryParse(parts[4], out int onHandQuantity)
+                            && decimal.TryParse(parts[4], out decimal onHandQuantity)
                             && Uri.TryCreate(parts[5], UriKind.Absolute, out Uri orderLink))
                         {
                             inventoryItems.Add(new InventoryItem
@@ -142,7 +143,8 @@ namespace WindowsAppColby
                 }
             }
         }
-            private void saveButton_Click(object sender, EventArgs e)
+
+        private void saveButton_Click(object sender, EventArgs e)
         {
             SaveInventory();
             UpdateInventoryDisplay();
@@ -150,28 +152,22 @@ namespace WindowsAppColby
 
         public void SaveInventory()
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to save changes?", "Save Changes", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            try
             {
-                try
+                using (StreamWriter writer = new StreamWriter(inventoryFilePath))
                 {
-                    using (StreamWriter writer = new StreamWriter(inventoryFilePath))
+                    foreach (var item in inventoryItems)
                     {
-                        foreach (var item in inventoryItems)
-                        {
-                            writer.WriteLine($"{item.PartNumber},{item.ListPrice},{item.Cost},{item.Price},{item.OnHand},{item.Order}");
-                        }
+                        writer.WriteLine($"{item.PartNumber},{item.ListPrice},{item.Cost},{item.Price},{item.OnHand},{item.Order}");
                     }
+                }
 
-                    MessageBox.Show("Changes saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error saving inventory: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                UpdateLowInventoryList();
             }
-            UpdateLowInventoryList();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error saving inventory: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
@@ -185,7 +181,7 @@ namespace WindowsAppColby
             UpdateInventoryDisplay(filteredList);
         }
 
-        private void UpdateInventoryDisplay(List<InventoryItem> displayList = null)
+        public void UpdateInventoryDisplay(List<InventoryItem> displayList = null)
         {
             dataGridViewInventory.DataSource = null;
             dataGridViewInventory.DataSource = displayList ?? inventoryItems;
@@ -206,6 +202,7 @@ namespace WindowsAppColby
                 }
             }
         }
+
         private void OpenInvoiceForm()
         {
             // Ensure that there are selected rows
@@ -237,20 +234,20 @@ namespace WindowsAppColby
             {
                 // Create a copy of selectedPartsToAdd to pass to the InvoiceForm
                 List<InventoryItem> selectedPartsCopy = new List<InventoryItem>(selectedPartsToAdd);
-
+                SaveInventory();
                 UpdateInventoryDisplay();
 
                 // Open the InvoiceForm with the selected parts copy
                 InvoiceForm invoiceForm = new InvoiceForm(selectedPartsCopy, inventoryManager);
                 invoiceForm.Show();
 
-                SaveInventory();
             }
             else
             {
                 MessageBox.Show("Please select parts to add to the invoice.", "No Parts Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
         private void addToInvoiceButton_Click(object sender, EventArgs e)
         {
             dataGridViewSelectParts.AutoGenerateColumns = false;
@@ -266,8 +263,8 @@ namespace WindowsAppColby
                     string input = Microsoft.VisualBasic.Interaction.InputBox($"How many {selectedPart.PartNumber} did you use?", "Quantity Used", "1");
 
                     // Prompt the user for the quantity used
-                    int quantityUsed;
-                    if (int.TryParse(input, out quantityUsed))
+                    decimal quantityUsed;
+                    if (decimal.TryParse(input, out quantityUsed))
                     {
                         selectedPart.QuantityUsed = quantityUsed;
                         selectedPart.OriginalOnHand = selectedPart.OnHand; // Store the original quantity
@@ -293,7 +290,6 @@ namespace WindowsAppColby
                 MessageBox.Show("Please select items from the inventory to add to the invoice.", "No Items Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
 
         private bool selectedPartsColumnsInitialized = false;
         private void UpdateSelectedPartsDisplay()
@@ -345,35 +341,12 @@ namespace WindowsAppColby
             dataGridViewSelectParts.DataSource = null;
             dataGridViewSelectParts.DataSource = displayList;
         }
+
         private void clearInvoiceList_Click(object sender, EventArgs e)
         {
-            // Ask for confirmation
-            DialogResult result = MessageBox.Show("Are you sure you want to clear the invoice list?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            // Check the user's response
-            if (result == DialogResult.Yes)
-            {
-                // Restore original on-hand quantities
-                foreach (var selectedPart in selectedPartsToAdd)
-                {
-                    selectedPart.OnHand = selectedPart.OriginalOnHand;
-                }
-
-                // Clear the selected parts list
-                selectedPartsToAdd.Clear();
-
-                // Clear the columns in the DataGridView
-                dataGridViewSelectParts.Columns.Clear();
-
-                // Update the DataGridView by clearing its data source and reassigning it
-                dataGridViewSelectParts.DataSource = null;
-                dataGridViewSelectParts.DataSource = selectedPartsToAdd;
-
-                // Reinitialize the columns
-                InitializeSelectedPartsDisplay();
-            }
+            // Implement functionality to clear the invoice list
+            selectedPartsToAdd.Clear();
+            UpdateSelectedPartsDisplay();
         }
-
-
     }
 }

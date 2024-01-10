@@ -32,28 +32,28 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridViewInventory = new System.Windows.Forms.DataGridView();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.generateInvoiceButton = new System.Windows.Forms.Button();
+            this.addToInvoiceButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.listBoxLow = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.generateInvoiceButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.clearInvoiceList = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.dataGridViewSelectParts = new System.Windows.Forms.DataGridView();
-            this.addToInvoiceButton = new System.Windows.Forms.Button();
-            this.clearInvoiceList = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInventory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSelectParts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,7 +87,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.panel1.Controls.Add(this.generateInvoiceButton);
             this.panel1.Controls.Add(this.addToInvoiceButton);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.searchTextBox);
@@ -96,6 +95,32 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(266, 722);
             this.panel1.TabIndex = 2;
+            // 
+            // generateInvoiceButton
+            // 
+            this.generateInvoiceButton.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.generateInvoiceButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.generateInvoiceButton.Location = new System.Drawing.Point(41, 175);
+            this.generateInvoiceButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.generateInvoiceButton.Name = "generateInvoiceButton";
+            this.generateInvoiceButton.Size = new System.Drawing.Size(230, 52);
+            this.generateInvoiceButton.TabIndex = 1;
+            this.generateInvoiceButton.Text = "Generate Invoice";
+            this.generateInvoiceButton.UseVisualStyleBackColor = false;
+            this.generateInvoiceButton.Click += new System.EventHandler(this.generateInvoiceButton_Click);
+            // 
+            // addToInvoiceButton
+            // 
+            this.addToInvoiceButton.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.addToInvoiceButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.addToInvoiceButton.Location = new System.Drawing.Point(3, 283);
+            this.addToInvoiceButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.addToInvoiceButton.Name = "addToInvoiceButton";
+            this.addToInvoiceButton.Size = new System.Drawing.Size(260, 52);
+            this.addToInvoiceButton.TabIndex = 2;
+            this.addToInvoiceButton.Text = "Add Item to Invoice List";
+            this.addToInvoiceButton.UseVisualStyleBackColor = false;
+            this.addToInvoiceButton.Click += new System.EventHandler(this.addToInvoiceButton_Click);
             // 
             // label1
             // 
@@ -161,19 +186,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Parts Getting Low";
             // 
-            // generateInvoiceButton
-            // 
-            this.generateInvoiceButton.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.generateInvoiceButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.generateInvoiceButton.Location = new System.Drawing.Point(18, 666);
-            this.generateInvoiceButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.generateInvoiceButton.Name = "generateInvoiceButton";
-            this.generateInvoiceButton.Size = new System.Drawing.Size(230, 52);
-            this.generateInvoiceButton.TabIndex = 1;
-            this.generateInvoiceButton.Text = "Generate Invoice";
-            this.generateInvoiceButton.UseVisualStyleBackColor = false;
-            this.generateInvoiceButton.Click += new System.EventHandler(this.generateInvoiceButton_Click);
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.HotTrack;
@@ -182,52 +194,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(266, 244);
             this.panel2.TabIndex = 6;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.panel5.Location = new System.Drawing.Point(1609, 743);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(303, 244);
-            this.panel5.TabIndex = 7;
-            // 
-            // dataGridViewSelectParts
-            // 
-            this.dataGridViewSelectParts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridViewSelectParts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridViewSelectParts.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridViewSelectParts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewSelectParts.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewSelectParts.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewSelectParts.GridColor = System.Drawing.SystemColors.Desktop;
-            this.dataGridViewSelectParts.Location = new System.Drawing.Point(277, 743);
-            this.dataGridViewSelectParts.Name = "dataGridViewSelectParts";
-            this.dataGridViewSelectParts.RowHeadersWidth = 100;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            this.dataGridViewSelectParts.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewSelectParts.Size = new System.Drawing.Size(1326, 244);
-            this.dataGridViewSelectParts.TabIndex = 8;
-            // 
-            // addToInvoiceButton
-            // 
-            this.addToInvoiceButton.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.addToInvoiceButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.addToInvoiceButton.Location = new System.Drawing.Point(3, 283);
-            this.addToInvoiceButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.addToInvoiceButton.Name = "addToInvoiceButton";
-            this.addToInvoiceButton.Size = new System.Drawing.Size(260, 52);
-            this.addToInvoiceButton.TabIndex = 2;
-            this.addToInvoiceButton.Text = "Add Item to Invoice List";
-            this.addToInvoiceButton.UseVisualStyleBackColor = false;
-            this.addToInvoiceButton.Click += new System.EventHandler(this.addToInvoiceButton_Click);
             // 
             // clearInvoiceList
             // 
@@ -240,7 +206,32 @@
             this.clearInvoiceList.TabIndex = 2;
             this.clearInvoiceList.Text = "Clear Invoice List";
             this.clearInvoiceList.UseVisualStyleBackColor = false;
-            this.clearInvoiceList.Click += new System.EventHandler(this.clearInvoiceList_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.panel5.Controls.Add(this.generateInvoiceButton);
+            this.panel5.Location = new System.Drawing.Point(1609, 743);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(303, 244);
+            this.panel5.TabIndex = 7;
+            // 
+            // dataGridViewSelectParts
+            // 
+            this.dataGridViewSelectParts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewSelectParts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridViewSelectParts.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridViewSelectParts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSelectParts.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dataGridViewSelectParts.GridColor = System.Drawing.SystemColors.Desktop;
+            this.dataGridViewSelectParts.Location = new System.Drawing.Point(277, 743);
+            this.dataGridViewSelectParts.Name = "dataGridViewSelectParts";
+            this.dataGridViewSelectParts.RowHeadersWidth = 100;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            this.dataGridViewSelectParts.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewSelectParts.Size = new System.Drawing.Size(1326, 244);
+            this.dataGridViewSelectParts.TabIndex = 8;
             // 
             // Form1
             // 
@@ -269,6 +260,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSelectParts)).EndInit();
             this.ResumeLayout(false);
 

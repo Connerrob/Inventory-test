@@ -30,5 +30,11 @@ namespace WindowsAppColby
                 }
             }
         }
+        public InventoryItem FindItem(string partNumber)
+        {
+            // Implement the logic to find and return the inventory item based on the part number
+            // For example:
+            return inventoryItems.FirstOrDefault(item => item.PartNumber == partNumber);
+        }
     }
 }
