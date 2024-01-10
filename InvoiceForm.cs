@@ -156,7 +156,7 @@ namespace WindowsAppColby
 
                 GenerateInvoiceContent(gfx, page.Width, page.Height, currentDate, invoiceNumber);
 
-                string filePath = $@"D:\conne\Documents\Invoice_{invoiceNumber}.pdf";
+                string filePath = $@"Invoice_{invoiceNumber}.pdf";
                 document.Save(filePath);
 
                 UpdateInvoiceCounter();
