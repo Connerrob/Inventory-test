@@ -171,8 +171,8 @@ namespace WindowsAppColby
         // Method to generate content for the invoice
         private void GenerateInvoiceContent(XGraphics gfx, XUnit pageWidth, XUnit pageHeight, string currentDate, string invoiceNumber)
         {
-            string companyName = "Robeson Hydraulics LLC.";
-            string ownerName = "Colby Robeson";
+            string companyName = "Your Company Here";
+            string ownerName = "John Name";
             string ownerContact = "Contact: 123-345-6789";
 
             string customerName = selectedItems.LastOrDefault()?.CustomerName ?? "N/A";
