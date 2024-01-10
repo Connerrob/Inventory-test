@@ -3,7 +3,7 @@ DEF456,20.75,15.30,25.80,56,https://www.herculesus.com/
 GHI789,100.00,34,120.75,11,https://www.herculesus.com/
 JKL012,15.50,10.25,18.75,23,https://www.herculesus.com/
 MNO345,75.90,60.20,90.30,11,https://www.herculesus.com/
-PQR678,45.60,35.75,50.25,67,https://www.herculesus.com/
+PQR678,45.60,35.75,50.25,66,https://www.herculesus.com/
 STU901,32.75,25.50,35.80,66,https://www.herculesus.com/
 VWX234,90.20,70.80,110.50,63,https://www.herculesus.com/
 YZA567,18.30,12.75,22.60,3,https://www.herculesus.com/
