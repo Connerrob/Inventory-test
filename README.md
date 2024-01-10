@@ -7,9 +7,9 @@ This inventory management system was developed for stock tracking for a business
 ## Features
 
 - **Part Number Tracking:** Easily manage and track part numbers.
-- **Invoice Generation** Can easily create an invoice with the chosen parts with little user input
-- **Invoice Number** Generates a new invoice number to easily keep track of the files
-- **Automatic Price calculation** Adds up total based off parts picked and how many used along with hours chosen.
+- **Invoice Generation:** Can easily create an invoice with the chosen parts with little user input
+- **Invoice Number:** Generates a new invoice number to easily keep track of the files
+- **Automatic Price calculation:** Adds up total based off parts picked and how many used along with hours chosen.
 - **Basic UI:** Simple user interface for quick access.
 
 ## How to Use
